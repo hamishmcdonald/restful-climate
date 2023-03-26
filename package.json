@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js" 
+    "devStart": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,10 @@
   "homepage": "https://github.com/hamishmcdonald/restful-climate#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^7.0.2"
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "mongoose-schema-extend": "^0.2.2",
+    "passport": "^0.6.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.3",
