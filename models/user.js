@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        unique: true
-    },
     firstName: {
         type: String,
     },
@@ -30,10 +26,15 @@ const userSchema = new mongoose.Schema({
         default: 'student',
         required: true
     },
+    accessToken: {
+        type: String
+    },
     LastLogin : {
         type: Date,
         default: Date.now,
     }
 })
+
+userSchema.index({ email: 1 }, { unique: true });
 
 module.exports = mongoose.model('User', userSchema)

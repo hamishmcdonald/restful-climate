@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const Admin = require('./models/admin')
+const User = require('./models/user')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true }, )
 const db = mongoose.connection
@@ -11,7 +11,7 @@ db.once('open', async () => {
     try {
         const admin = new User({
             username: 'root',
-            password: process.env.ADMIN_PASSWORD,
+            password: process.env.ADMIN_PASSWORD.toString,
             role: 'admin'
         })
         await admin.save();
@@ -23,12 +23,12 @@ db.once('open', async () => {
 app.use(express.json())
 
 const indexRouter = require('./routes/index')
-const usersRouter = require('./routes/users')
+const roleRouter = require('./routes/role')
 const authRouter = require('./routes/auth')
-const climateDataRouter = require('./routes/climate')
+const climateRouter = require('./routes/climate')
 
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
+app.use('/role', roleRouter)
 app.use('/auth', authRouter)
 app.use('/climate', climateRouter)
 

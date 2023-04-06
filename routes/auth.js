@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const crypt = require('crypto')
+const crypto = require('crypto')
 
 // Registration endpoint
 router.post('/register', (req, res) => {
@@ -29,11 +29,15 @@ router.post('/login', (req, res, next) => {
       return res.status(401).json({ message: info.message });
     }
     req.logIn(user, (err) => {
-      if (err) {
+        if (err) {
         return next(err);
       }
-      const token = jwt.sign(user.username, crypto.randomBytes(32).toString('hex'), { expiresIn: '1h' })
-      return res.json({ token });
+      try {
+        const token = jwt.sign({username: user.username}, crypto.randomBytes(32).toString('hex'), { expiresIn: '1h' })
+        return res.json({ token });
+      } catch(err) {
+        return
+      }
     });
   })(req, res, next);
 });

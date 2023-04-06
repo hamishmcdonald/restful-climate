@@ -42,31 +42,31 @@ router.post('/register', async (req, res) => {
     });
 });
 
-router.put('/:id', async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id);
+// router.put('/:id', async (req, res) => {
+//     try {
+//         const user = await User.findById(req.params.id);
           
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
 
-        const userAttributes = Object.keys(User.obj)
+//         const userAttributes = Object.keys(User.obj)
 
-        for (i = 0; i < userAttributes.length; i++) {
-            try {
-                user.userAttributes[i] = req.body.userAttributes[i]
-            } catch {}
-        }
+//         for (i = 0; i < userAttributes.length; i++) {
+//             try {
+//                 user.userAttributes[i] = req.body.userAttributes[i]
+//             } catch {}
+//         }
         
-        // Save updated user
-       await user.save();
-    //only return the user once saved
-       res.json(user);
-    } catch {
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
-    }
-})
+//         // Save updated user
+//        await user.save();
+//     //only return the user once saved
+//        res.json(user);
+//     } catch {
+//         console.error(err);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// })
 
 router.delete('/:id', async (req, res) => {
     try {
@@ -83,7 +83,5 @@ router.delete('/:id', async (req, res) => {
         res.status(500).send({ error: 'Internal server error' });
     }
 })
-
-router.delete()
 
 module.exports = router

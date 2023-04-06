@@ -1,69 +1,69 @@
 const express = require('express');
 const router = express.Router();
-const { Data } = require('../models/data');
+const { Datapoint } = require('../models/datapoint');
 const { authenticateUser, authoriseUser } = require('../middleware');
 
 router.use(authenticateUser)
 
-// GET all climate data
+// GET all climate datapoints
 router.get('/', authoriseUser(['administrator', 'teacher', 'student']), async (req, res) => {
   try {
-    const data = await Data.find({});
-    res.send(data);
+    const datapoints = await Datapoint.find({});
+    res.send(datapoints);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
   }
 });
 
-// POST a new climate data entry
+// POST a new climate datapoint entry
 router.post('/', authoriseUser(['administrator', 'teacher']), async (req, res) => {
   try {
-    const data = new Data(req.body);
-    await data.save();
-    res.status(201).send(data);
+    const datapoint = new Datapoint(req.body);
+    await datapoint.save();
+    res.status(201).send(datapoint);
   } catch (error) {
     console.log(error);
     res.status(400).send(error.message);
   }
 });
 
-// GET climate data by ID
+// GET climate datapoint by ID
 router.get('/:id', authoriseUser(['administrator', 'teacher', 'student']), async (req, res) => {
   try {
-    const data = await Data.findById(req.params.id);
-    if (!data) {
-      return res.status(404).send('Climate data not found');
+    const datapoint = await Datapoint.findById(req.params.id);
+    if (!datapoint) {
+      return res.status(404).send('Climate datapoint not found');
     }
-    res.send(data);
+    res.send(datpoint);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
   }
 });
 
-// PUT update climate data by ID
+// PUT update climate datapoint by ID
 router.put('/:id', authoriseUser(['administrator', 'teacher']), async (req, res) => {
   try {
-    const data = await Data.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!data) {
-      return res.status(404).send('Climate data not found');
+    const datapoint = await Datapoint.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!datpoint) {
+      return res.status(404).send('Climate datapoint not found');
     }
-    res.send(data);
+    res.send(datapoint);
   } catch (error) {
     console.log(error);
     res.status(400).send(error.message);
   }
 });
 
-// DELETE climate data by ID
+// DELETE climate datapoint by ID
 router.delete('/:id', authoriseUser(['administrator', 'teacher']), async (req, res) => {
   try {
-    const data = await Data.findByIdAndDelete(req.params.id);
-    if (!data) {
-      return res.status(404).send('Climate data not found');
+    const datapoint = await Datapoint.findByIdAndDelete(req.params.id);
+    if (!datapoint) {
+      return res.status(404).send('Climate datapoint not found');
     }
-    res.send(data);
+    res.send(datapoint);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);

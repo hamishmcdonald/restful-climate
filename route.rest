@@ -1,1 +1,18 @@
-GET http://localhost:3000/subscribers
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "root"
+}
+###
+
+GET http://localhost:3000/climate
+
+###
+
+GET http://localhost:3000/index
+
+###
+
+GET http://localhost:3000/users/1
