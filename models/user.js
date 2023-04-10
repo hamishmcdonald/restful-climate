@@ -11,30 +11,30 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
+    // username: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
+    // password: {
+    //     type: String,
+    //     required: true
+    // },
    role: {
         type: String,
         enum: ['student', 'teacher', 'admin'],
-        default: 'student',
-        required: true
+        default: 'student'
     },
-    accessToken: {
-        type: String
-    },
+    // accessToken: {
+    //     type: String
+    // },
     LastLogin : {
         type: Date,
         default: Date.now,
     }
 })
 
-userSchema.index({ email: 1 }, { unique: true });
+userSchema.index({ password: 1 });
+userSchema.index({ lastLogin: 1 }, { expireAfterSeconds: 2592000 });
 
 module.exports = mongoose.model('User', userSchema)

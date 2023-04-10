@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-const { authenticateUser, authoriseUser } = require('../middleware');
+const { authoriseUser } = require('../middleware');
 
-router.use(authenticateUser, authoriseUser(['admin', 'teacher']))
+router.use(authoriseUser(['admin', 'teacher']))
 
 router.get('/', async (req, res) => {
     try {

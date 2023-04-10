@@ -7,7 +7,45 @@ Content-Type: application/json
 }
 ###
 
-GET http://localhost:3000/climate
+GET http://localhost:3000/auth/642fd2781007fe3cfd6790b7
+
+###
+
+GET http://localhost:3000/auth
+
+###
+
+POST http://localhost:3000/climate/642fd2781007fe3cfd6790b8
+Content-Type: application/json
+
+{
+    "device_name": "TEST LOCATION",
+    "payload_fields_air_temperature_value": 24.1,
+    "payload_fields_atmospheric_pressure_value": 100.23
+}
+
+###
+
+PUT http://localhost:3000/climate/642fd2781007fe3cfd6790b8
+Content-Type: application/json
+
+{
+    "device_name": "TEST LOCATION 2",
+    "payload_fields_air_temperature_value": 100,
+    "payload_fields_atmospheric_pressure_value": 3.5
+}
+
+###
+
+PATCH http://localhost:3000/climate/642fd2781007fe3cfd6790b8
+Content-Type: application/json
+{
+    "device_name": "Hello World!",
+}
+
+###
+
+DELETE http://localhost:3000/climate/642fd2781007fe3cfd6790b8
 
 ###
 

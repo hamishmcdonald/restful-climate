@@ -1,41 +1,41 @@
-const User = require('../models/userModel');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+// const User = require('./models/user');
+// const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcrypt');
 
-async function hashPassword(password) {
-  return await bcrypt.hash(password, 10);
- }
+// async function hashPassword(password) {
+//   return await bcrypt.hash(password, 10);
+//  }
 
-async function validatePassword(plainPassword, hashedPassword) {
-  return await bcrypt.compare(plainPassword, hashedPassword);
-}
+// async function validatePassword(plainPassword, hashedPassword) {
+//   return await bcrypt.compare(plainPassword, hashedPassword);
+// }
 
-exports.register = async (req, res, next) => {
-  try {
-   const { email, password, role } = req.body
-   const hashedPassword = await hashPassword(password);
-   const newUser = new User({ email, password: hashedPassword, role: role || "basic" });
-   const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d"
-   });
-   newUser.accessToken = accessToken;
-   await newUser.save();
-   res.json({
-    data: newUser,
-    accessToken
-   })
-  } catch (error) {
-   next(error)
-  }
-}
+// exports.register = async (req, res, next) => {
+//   try {
+//    const { email, password, role } = req.body
+//    const hashedPassword = await hashPassword(password);
+//    const newUser = new User({ email, password: hashedPassword, role: role || "basic" });
+//    const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
+//     expiresIn: "1d"
+//    });
+//    newUser.accessToken = accessToken;
+//    await newUser.save();
+//    res.json({
+//     data: newUser,
+//     accessToken
+//    })
+//   } catch (error) {
+//    next(error)
+//   }
+// }
 
-function authenticateUser(req, res, next) {
-    if (!req.session.user) {
-      res.redirect('/auth');
-    } else {
-      next();
-    }
-  }
+// function authenticateUser(req, res, next) {
+//     if (!req.session.user) {
+//       res.redirect('/auth');
+//     } else {
+//       next();
+//     }
+//   }
 
 const authoriseUser = (roles) => {
   return (req, res, next) => {
@@ -47,4 +47,4 @@ const authoriseUser = (roles) => {
   };
 };
 
-module.exports = { authenticateUser, authoriseUser }
+module.exports = { authoriseUser }
