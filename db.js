@@ -6,7 +6,7 @@ dotenv.config();
 const MONGODB_URL = process.env.MONGODB_URL;
 
 const  
- connect = async () => { // renamed for clarity
+ connect = async () => {
   try {
     const connection = await mongoose.connect(MONGODB_URL);
     return connection;

@@ -1,9 +1,8 @@
-/** todo:
- * - send errors and user/weatherdatapoint objects in response
- * - correct error handling for remove/modify rest users in range
- * 
- * 
- */
+//WARNING!!! THE FOLLOWING ENVIROMENT VARIABLES MUST BE SET BEFORE TESTING AND DEPLOYMENT OF THE API!!!
+//SERVER_PORT - port number for the server to run on eg. SERVER_PORT = '5000'
+//MONGODB_URL - url for the mongodb connection eg. MONGODB_URL = 'mongodb://localhost:27017'
+//MONGODB_URI - uri for the mongodb database eg. MONGODB_URI = 'mongodb://localhost:27017/restful-climate'
+//SECRET_KEY - secret key for the session eg. SECRET_KEY = 'root'
 
 require('dotenv').config();
 const express = require('express');
